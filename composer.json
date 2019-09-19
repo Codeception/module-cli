@@ -1,0 +1,28 @@
+{
+    "name":"codeception/module-cli",
+    "description":"Codeception module for testing basic shell commands and shell output",
+    "keywords":["codeception"],
+    "homepage":"http://codeception.com/",
+    "type":"library",
+    "license":"MIT",
+    "authors":[
+        {
+            "name":"Michael Bodnarchuk"
+        }
+    ],
+    "minimum-stability": "RC",
+
+    "require": {
+        "php": ">=5.6.0 <8.0",
+        "codeception/codeception": "4.0.x-dev | ^4.0"
+    },
+    "require-dev": {
+        "codeception/util-robohelpers": "dev-master"
+    },
+    "autoload":{
+        "classmap": ["src/"]
+    },
+    "config": {
+        "classmap-authoritative": true
+    }
+}
