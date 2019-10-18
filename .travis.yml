@@ -18,4 +18,4 @@ install:
 script:
   # This module has no tests yet
   - composer validate --strict
-  - php -l src/Codeception/Module/Apc.php
+  - php -l src/Codeception/Module/Cli.php
