@@ -74,7 +74,7 @@ class Cli extends CodeceptionModule
     public function dontSeeInShellOutput($text)
     {
         $this->debug($this->output);
-        \PHPUnit\Framework\Assert::assertStringNotContainsString($text, $this->output);
+        \Codeception\PHPUnit\TestCase::assertStringNotContainsString($text, $this->output);
     }
 
     /**
