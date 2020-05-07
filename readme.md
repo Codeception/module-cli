@@ -1,6 +1,6 @@
 # Codeception module for testing basic shell commands and shell output
 
-[![Build Status](https://travis-ci.org/Codeception/module-cli.svg?branch=master)](https://travis-ci.org/Codeception/module-cli)
+![Build Status](https://github.com/Codeception/module-cli/workflows/CI/badge.svg)
 
 ## Installation
 
