@@ -27,7 +27,7 @@ class Cli extends CodeceptionModule
 
     /**
      * Executes a shell command.
-     * Fails If exit code is > 0. You can disable this by setting second parameter to false
+     * Fails if exit code is > 0. You can disable this by passing `false` as second argument
      *
      * ```php
      * <?php
@@ -86,7 +86,7 @@ class Cli extends CodeceptionModule
     }
 
     /**
-     * Checks result code
+     * Checks result code. To verify a result code > 0, you need to pass `false` as second argument to `runShellCommand()`
      *
      * ```php
      * <?php
