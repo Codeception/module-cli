@@ -90,7 +90,7 @@ class Cli extends CodeceptionModule
      */
     public function grabShellOutput()
     {
-        $this->output;
+        return $this->output;
     }
 
     /**
