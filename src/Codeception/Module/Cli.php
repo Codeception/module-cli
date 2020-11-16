@@ -86,6 +86,14 @@ class Cli extends CodeceptionModule
     }
 
     /**
+     * Returns the output from latest command
+     */
+    public function grabShellOutput()
+    {
+        return $this->output;
+    }
+
+    /**
      * Checks result code. To verify a result code > 0, you need to pass `false` as second argument to `runShellCommand()`
      *
      * ```php
