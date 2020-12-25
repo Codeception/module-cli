@@ -82,7 +82,7 @@ class Cli extends CodeceptionModule
      */
     public function seeShellOutputMatches($regex)
     {
-        \PHPUnit\Framework\Assert::assertRegExp($regex, $this->output);
+        \Codeception\PHPUnit\TestCase::assertRegExp($regex, $this->output);
     }
 
     /**
