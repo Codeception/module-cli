@@ -1,13 +1,24 @@
-# Codeception module for testing basic shell commands and shell output
+# Codeception Module CLI
 
-![Build Status](https://github.com/Codeception/module-cli/workflows/CI/badge.svg)
+A Codeception module for testing basic shell commands and shell output.
+
+[![Actions Status](https://github.com/Codeception/module-cli/workflows/CI/badge.svg)](https://github.com/Codeception/module-cli/actions)
+[![Latest Stable Version](https://poser.pugx.org/codeception/module-cli/v/stable)](https://github.com/Codeception/module-cli/releases)
+[![Total Downloads](https://poser.pugx.org/codeception/module-cli/downloads)](https://packagist.org/packages/codeception/module-cli)
+[![License](https://poser.pugx.org/codeception/module-cli/license)](/LICENSE)
 
 ## Installation
 
 ```
-composer require --dev "codeception/module-cli"
+composer require "codeception/module-cli" --dev
 ```
 
 ## Documentation
 
-<a href="https://codeception.com/docs/modules/Cli">Module documentation</a>
+See [the module documentation](https://codeception.com/docs/modules/Cli).
+
+## License
+
+`Codeception Module CLI` is open-sourced software licensed under the [MIT](/LICENSE) License.
+
+© Codeception PHP Testing Framework
