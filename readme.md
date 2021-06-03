@@ -7,6 +7,10 @@ A Codeception module for testing basic shell commands and shell output.
 [![Total Downloads](https://poser.pugx.org/codeception/module-cli/downloads)](https://packagist.org/packages/codeception/module-cli)
 [![License](https://poser.pugx.org/codeception/module-cli/license)](/LICENSE)
 
+## Requirements
+
+* `PHP 7.1` or higher.
+
 ## Installation
 
 ```
