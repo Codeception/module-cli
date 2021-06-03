@@ -1,7 +1,10 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Codeception\Module;
 
-use Codeception\Module as CodeceptionModule;
+use Codeception\Module;
 use Codeception\TestInterface;
 
 /**
@@ -14,13 +17,16 @@ use Codeception\TestInterface;
  *
  * *Please review the code of non-stable modules and provide patches if you have issues.*
  */
-class Cli extends CodeceptionModule
+class Cli extends Module
 {
+    /**
+     * @var string
+     */
     public $output = '';
 
-    public $result = null;
+    public $result;
 
-    public function _before(TestInterface $test)
+    public function _before(TestInterface $test): void
     {
         $this->output = '';
     }
@@ -38,9 +44,8 @@ class Cli extends CodeceptionModule
      * ```
      *
      * @param $command
-     * @param bool $failNonZero
      */
-    public function runShellCommand($command, $failNonZero = true)
+    public function runShellCommand($command, bool $failNonZero = true): void
     {
         $data = [];
         exec("$command", $data, $resultCode);
@@ -52,7 +57,7 @@ class Cli extends CodeceptionModule
         if ($resultCode !== 0 && $failNonZero) {
             \PHPUnit\Framework\Assert::fail("Result code was $resultCode.\n\n" . $this->output);
         }
-        $this->debug(preg_replace('~s/\e\[\d+(?>(;\d+)*)m//g~', '', $this->output));
+        $this->debug(preg_replace('#s/\e\[\d+(?>(;\d+)*)m//g#', '', $this->output));
     }
 
     /**
@@ -60,7 +65,7 @@ class Cli extends CodeceptionModule
      *
      * @param $text
      */
-    public function seeInShellOutput($text)
+    public function seeInShellOutput($text): void
     {
         \Codeception\PHPUnit\TestCase::assertStringContainsString($text, $this->output);
     }
@@ -69,18 +74,14 @@ class Cli extends CodeceptionModule
      * Checks that output from latest command doesn't contain text
      *
      * @param $text
-     *
      */
-    public function dontSeeInShellOutput($text)
+    public function dontSeeInShellOutput($text): void
     {
         $this->debug($this->output);
         \Codeception\PHPUnit\TestCase::assertStringNotContainsString($text, $this->output);
     }
 
-    /**
-     * @param $regex
-     */
-    public function seeShellOutputMatches($regex)
+    public function seeShellOutputMatches($regex): void
     {
         \Codeception\PHPUnit\TestCase::assertRegExp($regex, $this->output);
     }
@@ -88,7 +89,7 @@ class Cli extends CodeceptionModule
     /**
      * Returns the output from latest command
      */
-    public function grabShellOutput()
+    public function getOutput(): string
     {
         return $this->output;
     }
@@ -103,9 +104,9 @@ class Cli extends CodeceptionModule
      *
      * @param $code
      */
-    public function seeResultCodeIs($code)
+    public function seeResultCodeIs($code): void
     {
-        $this->assertEquals($this->result, $code, "result code is $code");
+        $this->assertEquals($this->result, $code, sprintf('result code is %s', $code));
     }
 
     /**
@@ -118,8 +119,8 @@ class Cli extends CodeceptionModule
      *
      * @param $code
      */
-    public function seeResultCodeIsNot($code)
+    public function seeResultCodeIsNot($code): void
     {
-        $this->assertNotEquals($this->result, $code, "result code is $code");
+        $this->assertNotEquals($this->result, $code, sprintf('result code is %s', $code));
     }
 }
