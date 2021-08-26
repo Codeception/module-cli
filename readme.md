@@ -17,6 +17,8 @@ composer require "codeception/module-cli" --dev
 
 See [the module documentation](https://codeception.com/docs/modules/Cli).
 
+[Changelog](https://github.com/Codeception/module-cli/releases)
+
 ## License
 
 `Codeception Module CLI` is open-sourced software licensed under the [MIT](/LICENSE) License.
