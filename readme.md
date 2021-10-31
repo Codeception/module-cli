@@ -9,7 +9,7 @@ A Codeception module for testing basic shell commands and shell output.
 
 ## Requirements
 
-* `PHP 7.1` or higher.
+* `PHP 7.4` or higher.
 
 ## Installation
 
