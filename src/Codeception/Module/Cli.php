@@ -1,8 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Codeception\Module;
 
-use Codeception\Module as CodeceptionModule;
+use Codeception\Module;
+use Codeception\PHPUnit\TestCase;
 use Codeception\TestInterface;
+use PHPUnit\Framework\Assert;
 
 /**
  * Wrapper for basic shell commands and shell output
@@ -14,13 +19,13 @@ use Codeception\TestInterface;
  *
  * *Please review the code of non-stable modules and provide patches if you have issues.*
  */
-class Cli extends CodeceptionModule
+class Cli extends Module
 {
-    public $output = '';
+    public string $output = '';
 
-    public $result = null;
+    public int $result;
 
-    public function _before(TestInterface $test)
+    public function _before(TestInterface $test): void
     {
         $this->output = '';
     }
@@ -36,59 +41,50 @@ class Cli extends CodeceptionModule
      * // do not fail test when command fails
      * $I->runShellCommand('phpunit', false);
      * ```
-     *
-     * @param $command
-     * @param bool $failNonZero
      */
-    public function runShellCommand($command, $failNonZero = true)
+    public function runShellCommand(string $command, bool $failNonZero = true): void
     {
         $data = [];
-        exec("$command", $data, $resultCode);
+        exec("{$command}", $data, $resultCode);
         $this->result = $resultCode;
         $this->output = implode("\n", $data);
         if ($this->output === null) {
-            \PHPUnit\Framework\Assert::fail("$command can't be executed");
+            Assert::fail("{$command} can't be executed");
         }
+
         if ($resultCode !== 0 && $failNonZero) {
-            \PHPUnit\Framework\Assert::fail("Result code was $resultCode.\n\n" . $this->output);
+            Assert::fail("Result code was {$resultCode}.\n\n" . $this->output);
         }
-        $this->debug(preg_replace('~s/\e\[\d+(?>(;\d+)*)m//g~', '', $this->output));
+
+        $this->debug(preg_replace('#s/\e\[\d+(?>(;\d+)*)m//g#', '', $this->output));
     }
 
     /**
      * Checks that output from last executed command contains text
-     *
-     * @param $text
      */
-    public function seeInShellOutput($text)
+    public function seeInShellOutput(string $text): void
     {
-        \Codeception\PHPUnit\TestCase::assertStringContainsString($text, $this->output);
+        TestCase::assertStringContainsString($text, $this->output);
     }
 
     /**
      * Checks that output from latest command doesn't contain text
-     *
-     * @param $text
-     *
      */
-    public function dontSeeInShellOutput($text)
+    public function dontSeeInShellOutput(string $text): void
     {
         $this->debug($this->output);
-        \Codeception\PHPUnit\TestCase::assertStringNotContainsString($text, $this->output);
+        TestCase::assertStringNotContainsString($text, $this->output);
     }
 
-    /**
-     * @param $regex
-     */
-    public function seeShellOutputMatches($regex)
+    public function seeShellOutputMatches(string $regex): void
     {
-        \Codeception\PHPUnit\TestCase::assertRegExp($regex, $this->output);
+        TestCase::assertMatchesRegularExpression($regex, $this->output);
     }
 
     /**
      * Returns the output from latest command
      */
-    public function grabShellOutput()
+    public function grabShellOutput(): string
     {
         return $this->output;
     }
@@ -100,12 +96,10 @@ class Cli extends CodeceptionModule
      * <?php
      * $I->seeResultCodeIs(0);
      * ```
-     *
-     * @param $code
      */
-    public function seeResultCodeIs($code)
+    public function seeResultCodeIs(int $code): void
     {
-        $this->assertEquals($this->result, $code, "result code is $code");
+        $this->assertEquals($this->result, $code, "result code is {$code}");
     }
 
     /**
@@ -115,11 +109,9 @@ class Cli extends CodeceptionModule
      * <?php
      * $I->seeResultCodeIsNot(0);
      * ```
-     *
-     * @param $code
      */
-    public function seeResultCodeIsNot($code)
+    public function seeResultCodeIsNot(int $code): void
     {
-        $this->assertNotEquals($this->result, $code, "result code is $code");
+        $this->assertNotEquals($this->result, $code, "result code is {$code}");
     }
 }
