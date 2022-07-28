@@ -13,7 +13,7 @@
     "minimum-stability": "RC",
     "require": {
         "php": "^7.4 || ^8.0",
-        "codeception/codeception": "*@dev"
+        "codeception/codeception": "^5.0 || *@dev"
     },
     "conflict": {
         "codeception/codeception": "<4.0"
