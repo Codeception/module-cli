@@ -45,6 +45,13 @@ class Cli extends Module
     public function runShellCommand(string $command, bool $failNonZero = true): void
     {
         $data = [];
+        /**
+         * \Symfony\Component\Console\Application::configureIO sets SHELL_VERBOSITY environment variable
+         * which may affect execution of shell command
+         */
+        if (\function_exists('putenv')) {
+            @putenv('SHELL_VERBOSITY');
+        }
         exec("{$command}", $data, $resultCode);
         $this->result = $resultCode;
         $this->output = implode("\n", $data);
