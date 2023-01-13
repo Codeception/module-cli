@@ -1,7 +1,9 @@
 {
     "name": "codeception/module-cli",
     "description": "Codeception module for testing basic shell commands and shell output",
-    "keywords": [ "codeception" ],
+    "keywords": [
+        "codeception"
+    ],
     "homepage": "https://codeception.com/",
     "type": "library",
     "license": "MIT",
@@ -13,7 +15,8 @@
     "minimum-stability": "RC",
     "require": {
         "php": "^7.4 || ^8.0",
-        "codeception/codeception": "*@dev"
+        "codeception/codeception": "*@dev",
+        "codeception/module-asserts": "*"
     },
     "conflict": {
         "codeception/codeception": "<4.0"

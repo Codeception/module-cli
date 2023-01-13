@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [7.4, 8.0, 8.1]
+        php: [7.4, 8.0, 8.1, 8.2]
 
     steps:
     - name: Checkout code
@@ -23,8 +23,16 @@ jobs:
     - name: Validate composer.json and composer.lock
       run: composer validate
 
+    - name: Install Codeception 4 on PHP 7.4
+      if: matrix.php == '7.4'
+      run: composer require codeception/codeception:"^4.2" -W --no-update
+
+    - name: Install Codeception 5 on PHP 8
+      if: matrix.php != '7.4'
+      run: composer require codeception/codeception:"^5.0" -W --no-update
+
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-interaction --no-suggest
 
     - name: Run test suite
-      run: php -l src/Codeception/Module/Cli.php
+      run: php vendor/bin/codecept run
